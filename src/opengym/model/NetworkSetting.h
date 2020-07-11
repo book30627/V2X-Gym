@@ -279,7 +279,7 @@ namespace ns3{
     extern std::string action_dtype; 
     extern vector<uint32_t> action_shape_vector;
 
-    std::vector<uint32_t> V2XGym_GetRLShape(string shape);
+    std::vector<uint32_t> V2XGym_GetRLShape(string shape);//函數詳細寫在cc檔
     extern double envStepTime; 
 
 
