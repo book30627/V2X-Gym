@@ -235,17 +235,17 @@ std::vector<uint32_t> V2XGym_GetRLShape(string shape){
     std::vector<uint32_t> vectorshape;
     uint obs_dim_num[5];
     int obs_dim = 0;
-    if (shape.empty()){
+    if (shape.empty()){   //檢查shap字串是否為空
         NS_LOG_UNCOND("In NetworkSetting.cc::V2XGym_GetRLShape: Nothing in it!");
         exit(1);
     }
-    char* shapechar = const_cast<char*>(shape.c_str());
-    char* pch = strtok( shapechar, ",");
+    char* shapechar = const_cast<char*>(shape.c_str()); //將字串轉成字元
+    char* pch = strtok( shapechar, ",");//將","以空格進行代替
     while (pch != NULL)
     {   
-        obs_dim_num[obs_dim] = atoi(pch);
+        obs_dim_num[obs_dim] = atoi(pch);  //將字元轉成int，從第一維度開始存入
         obs_dim ++;
-        pch = strtok (NULL, ",");
+        pch = strtok (NULL, ",");//預定只有一個維度，所以跳出
     }
     if (obs_dim == 1){
         vectorshape = { obs_dim_num[0], };
