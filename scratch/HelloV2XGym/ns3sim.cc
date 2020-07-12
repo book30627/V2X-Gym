@@ -157,9 +157,9 @@ main (int argc, char *argv[])
   //cmd.AddValue... need to add between here
   V2XGym_SettingConfigParameters();
   
-  Ptr<NetworkSetting> NetSet = CreateObject<NetworkSetting>();
-  NetSet->IncludeConfig(NetworkConfig);
-  std::string HelloV2XGym;
+  Ptr<NetworkSetting> NetSet = CreateObject<NetworkSetting>();//創建NetworkSetting class
+  NetSet->IncludeConfig(NetworkConfig);//讀xml檔案
+  std::string HelloV2XGym; //宣告一變數
   V2XGym_RegisterParameters(HelloV2XGym, string, NetSet);
   NS_LOG_UNCOND("HelloV2XGym (set from config files): "<<HelloV2XGym);
   RngSeedManager::SetSeed (1);
