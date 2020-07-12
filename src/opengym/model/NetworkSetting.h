@@ -154,7 +154,7 @@ namespace ns3{
     #define CallSubMethod_twoArg(Helper, SubMethod, Arg1, Arg2) Helper.SubMethod( (Arg1), (Arg2) )
     #define CallSubMethod_oneArg(Helper, SubMethod, Arg1) Helper.SubMethod(Arg1 )
     #define CallSubMethod_noArg(Helper, SubMethod) Helper.SubMethod()
-    #define Stringize(name) #name
+    #define Stringize(name) #name   //將傳進來的變數名，變成字串。 注意:不是變數名裡的值變成字串
 
     extern ReturnNS3_CType RegisterMethodResult1, RegisterMethodResult2;
     extern int MethodArgSelection;
@@ -241,7 +241,7 @@ namespace ns3{
             /*ReturnCType Parameter##Result;*/\
             RegisterMethodResult1 = NetworkSettingInstance->GetArg<Type>( Stringize(Parameter), 0);\
             Parameter = RegisterMethodResult1.P##Type;\
-        } while(0)  
+        } while(0)  //在define中，##為連接的意思，若Type傳入為string，P##Type則為Pstring
     
     #define InitialCmd() \
             CommandLine Cmd\
@@ -350,7 +350,7 @@ namespace ns3{
         public:
             NetworkSetting(){
             }
-            void IncludeConfig(std::string Dir);
+            void IncludeConfig(std::string Dir); //呼叫此時會讀入Xml 並將值存入Config
             bool Search(std::string helper, std::string submethod);
             bool Search(std::string parameter);
             int ArgNum(std::string helper, std::string submethod);
@@ -359,8 +359,8 @@ namespace ns3{
             ReturnNS3_CType GetArg(std::string Parameter, int index){ //return fisrt arg of Helper::SubMethod in config file
                 
                 ReturnNS3_CType result;
-                if(  !strcmp( TypeName<T>::Get(), "double") ){
-                    result.Pdouble = stod( Config[Parameter][index] );
+                if(  !strcmp( TypeName<T>::Get(), "double") ){      //檢測type是否為double以此類推
+                    result.Pdouble = stod( Config[Parameter][index] ); //回傳xml中所需的element的第幾個至struct ReturnNS3_CType 中
                 }
                 else if( !strcmp( TypeName<T>::Get() ,"bool" )){
                     result.Pbool = Config[Parameter][index] == "true"? true:false ;
